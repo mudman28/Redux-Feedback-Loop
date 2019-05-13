@@ -17,3 +17,15 @@
   font-size: large;
 }
 
+.note{
+  color: blue
+}
+
+.ratingText{
+  color: blue;
+  font-size: 60px
+}
+
+.commentSection{
+  width: 50%;
+}

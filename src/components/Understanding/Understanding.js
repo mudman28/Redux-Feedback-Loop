@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import {connect} from 'react-redux';
 
 class Understanding extends Component{
+    //currentPage keeps tracks of the location
     state = {
         understanding : '',
         currentPage : 2
@@ -13,6 +14,8 @@ handleRating = (event) => {
             understanding : event.target.value,
         });
 }
+
+//goes to the next page
 handleNext = event => {
     if(this.state.understanding > 0){
         this.props.dispatch({type : 'SET_UNDERSTANDING', payload: this.state.understanding});
@@ -28,7 +31,7 @@ handleNext = event => {
         } else {
         labelOrRating = <div className="ratingLabel">
                             <h2>Choose Between 1 - 5</h2>
-                            <p>With 1 being the least understanding and 5 being the most understanding</p>
+                            
                         </div>
         }
         return( 
@@ -43,6 +46,7 @@ handleNext = event => {
                     <button className="score" type="submit" value="5" onClick={this.handleRating}>5</button>   
                 </div>
                 <div>
+                        <p className="note">With 1 being "the least understanding" and 5 being "the most understanding"</p>
                         <button onClick={this.handleNext} className="next">Next</button>
                 </div>
             </div>

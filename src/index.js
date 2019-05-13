@@ -12,7 +12,6 @@ const feedback = {
         understanding : '',
         support : '',
         comments : '',
-        flagged : false
     }
 
 const page = {
@@ -31,15 +30,15 @@ const pageReducer = (state = page, action) => {
 const moraleReducer = (state = feedback, action) => {
     switch(action.type){
         case "SET_FEELING" :
-            return {feeling : action.payload};
+            return {...state, feeling : action.payload};
         case "SET_UNDERSTANDING" :
-            return {understanding : action.payload};
+            return {...state, understanding : action.payload};
         case "SET_SUPPORT" :
-            return {support : action.payload};
+            return {...state, support : action.payload};
         case "SET_COMMENTS" :
-            return {comments : action.payload};
+            return {...state, comments : action.payload};
         case "SET_URGENT" :
-            return {flagged : action.payload};
+            return {...state, flagged : action.payload};
         default :
             return state;
     }

@@ -4,9 +4,7 @@ import {connect} from 'react-redux';
 
 
 class Review extends Component{
-    state = {
-        flagged : true
-    }
+    //edit button takes you back to the page
 
     handleEditFeels = (event) => {
         if(this.props.feedback.feeling > 0){
@@ -28,20 +26,11 @@ class Review extends Component{
             this.props.history.push('/comments');
         }
     }
-
-    handleUrgent = (event) => {
-        console.log('Urgent', this.state.flagged);
-            
-        this.setState({
-            flagged : !this.state.flagged
-        });
-        this.props.dispatch({type : 'SET_URGENT', payload: this.state.flagged})
-        
-    }
-
+    
+    //submits results of the feedback to the database
     handleSubmit = event => {
         if(this.props.navigate.currentPage === 4){
-            axios.post('/feedback', {feedback: this.props.feedback})
+            axios.post('/feedback', this.props.feedback)
             .then(response => {
                 this.props.history.push('/'); 
             })
@@ -66,7 +55,7 @@ class Review extends Component{
         let nextOrSubmit;
 
         if(this.props.navigate.currentPage === 4){
-            nextOrSubmit = <div className="submitBtn"><button onSubmit={this.handleSubmit}>Submit</button></div>
+            nextOrSubmit = <div className="submitBtn"><button onClick={this.handleSubmit}>Submit</button></div>
         } else {
             nextOrSubmit = <div className="nextBtn"><button onClick={this.handleNext} className="next">Next</button></div>
         }
@@ -80,10 +69,6 @@ class Review extends Component{
             </div>
             <div>
             <p>Comments: {this.props.feedback.comments}<button onClick={this.handleEditComments}>edit</button></p>
-            <p> Urgent Contact: </p>
-            </div>
-            <div>
-                <button onClick={this.handleUrgent}>I Need Someone to Contact Me.</button>
             </div>
             <div>
                 <p>Please go to the next section to input feedback.</p>

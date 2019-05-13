@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 
 
 class Support extends Component{
+    //currentPage keeps tracks of the location
     state = {
         support : '',
         currentPage : 3
@@ -14,6 +15,8 @@ handleRating = (event) => {
                 support : event.target.value,
         });
 }
+
+//goes to the next page
 handleNext = event => {
     if(this.state.support > 0){
         this.props.dispatch({type : 'SET_SUPPORT', payload: this.state.support});
@@ -30,7 +33,7 @@ handleNext = event => {
         } else {
         labelOrRating = <div className="ratingLabel">
                             <h2>Choose Between 1 - 5</h2>
-                            <p>With 1 being the least supportive and 5 being the most supportive</p>
+                            
                         </div>
         }
         return( 
@@ -45,6 +48,7 @@ handleNext = event => {
                     <button className="score" type="submit" value="5" onClick={this.handleRating}>5</button>   
                 </div>
                 <div>
+                        <p className="note">With 1 being "the least supportive" and 5 being "the most supportive"</p>
                         <button onClick={this.handleNext} className="next">Next</button>
                 </div>
             </div>

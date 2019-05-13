@@ -3,11 +3,13 @@ import {connect} from 'react-redux';
 
 
 class Comments extends Component{
+    //currentPage keeps tracks of the location
     state = {
         comments : '',
         currentPage : 4
       };
 
+    //shows changes to text
     handleChange = (event) => {
         console.log('comments are', this.state.comments);
             
@@ -17,6 +19,7 @@ class Comments extends Component{
         });
     }
 
+    //submits text
     handleSubmit = (event) => {
         if(this.state.comments !== ''){
         event.preventDefault();
@@ -26,6 +29,7 @@ class Comments extends Component{
         }
     }
 
+    //submits generic message
     handleNext = (event) => {
         this.props.dispatch({type: 'SET_COMMENTS', payload: "I don't have anything to add at this time."});
         this.props.dispatch({type : 'SET_PAGE', payload: this.state.currentPage})
@@ -34,7 +38,7 @@ class Comments extends Component{
 
     render(){
         let showNext;
-
+        //toggles between note to skip comments and a message encouraging comments.
         if(this.state.comments === ''){
             showNext =  <div>
                             <h3>If you don't want to comment just click 'Next'</h3>

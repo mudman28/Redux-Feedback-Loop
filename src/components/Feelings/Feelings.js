@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import {connect} from 'react-redux';
 
 class Feelings extends Component{
+        //currentPage keeps tracks of the location
         state = {
                 feeling : '',
                 currentPage : 1
@@ -13,6 +14,7 @@ class Feelings extends Component{
                         feeling : event.target.value,
                 });
         }
+        //goes to the next page
         handleNext = (event) => {
                 if(this.state.feeling > 0){
                         this.props.dispatch({type : 'SET_FEELING', payload: this.state.feeling});
@@ -24,12 +26,12 @@ class Feelings extends Component{
         render(){
         let labelOrRating;
 
-        if(this.state.feelings > 0){
-            labelOrRating = <div className="ratingText">{this.state.feelings}</div>
+        if(this.state.feeling > 0){
+            labelOrRating = <div className="ratingText">{this.state.feeling}</div>
         } else {
         labelOrRating = <div className="ratingLabel">
                             <h2>Choose Between 1 - 5</h2>
-                            <p>With 1 being feeling the worst and 5 being feeling the best</p>
+                            
                         </div>
         }
                 return( 
@@ -44,6 +46,7 @@ class Feelings extends Component{
                                         <button className="score" type="submit" value="5" onClick={this.handleRating}>5</button>   
                                 </div>
                                 <div>
+                                        <p className="note">With 1 being "feeling the worst" and 5 being "feeling the best"</p>
                                         <button onClick={this.handleNext} className="next">Next</button>
                                 </div>
             </div>
