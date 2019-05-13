@@ -7,19 +7,31 @@ import registerServiceWorker from './registerServiceWorker';
 import { createStore, combineReducers} from 'redux';
 import { Provider } from 'react-redux';
 
-const answers = {
-    feelings : '',
-    understanding : '',
-    support : '',
-    comments : '',
-    urgent : ''
+const feedback = {
+        feeling : '',
+        understanding : '',
+        support : '',
+        comments : '',
+        flagged : false
+    }
+
+const page = {
+    currentPage : ''
 }
 
-
-const moraleReducer = (state = answers, action) => {
+const pageReducer = (state = page, action) => {
     switch(action.type){
-        case "SET_FEELINGS" :
-            return {feelings : action.payload};
+        case "SET_PAGE" :
+            return {currentPage : action.payload};
+        default :
+            return state;
+    }
+}
+
+const moraleReducer = (state = feedback, action) => {
+    switch(action.type){
+        case "SET_FEELING" :
+            return {feeling : action.payload};
         case "SET_UNDERSTANDING" :
             return {understanding : action.payload};
         case "SET_SUPPORT" :
@@ -27,42 +39,16 @@ const moraleReducer = (state = answers, action) => {
         case "SET_COMMENTS" :
             return {comments : action.payload};
         case "SET_URGENT" :
-            return {feelings : action.payload};
+            return {flagged : action.payload};
         default :
             return state;
     }
 }
-// const feelingsReducer = (state = answers, action) => {
-//     if (action.type === "SET_FEELINGS") {
-//         return [...state, action.payload];
-//     }
-//     return state;
-// };
-// const supportReducer = (state = answers, action) => {
-//     if (action.type === "SET_UNDERSTANDING") {
-
-//         return [...state, action.payload];
-//     }
-//     return state;
-// };
-// const understandingReducer = (state = answers, action) => {
-//     if (action.type === "SET_SUPPORT") {
-
-//         return [...state, action.payload];
-//     }
-//     return state;
-// };
-// const commentsReducer = (state = answers, action) => {
-//     if (action.type === "SET_COMMENTS") {
-
-//         return [...state, action.payload];
-//     }
-//     return state;
-// };
 
 const storeInstance = createStore(
     combineReducers({    
     moraleReducer,
+    pageReducer
         }),
 );
 

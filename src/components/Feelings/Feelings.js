@@ -3,18 +3,20 @@ import {connect} from 'react-redux';
 
 class Feelings extends Component{
         state = {
-                feelings : ''
+                feeling : '',
+                currentPage : 1
         }
 
         handleRating = (event) => {
                 console.log('handleRating: ', event.target.value);
                 this.setState({
-                        feelings : event.target.value,
+                        feeling : event.target.value,
                 });
         }
         handleNext = (event) => {
-                if(this.state.feelings > 0){
-                        this.props.dispatch({type : 'SET_FEELINGS', payload: this.state.feelings});
+                if(this.state.feeling > 0){
+                        this.props.dispatch({type : 'SET_FEELING', payload: this.state.feeling});
+                        this.props.dispatch({type : 'SET_PAGE', payload: this.state.currentPage});
                         this.props.history.push('/review');
                 }
         }
@@ -27,7 +29,7 @@ class Feelings extends Component{
         } else {
         labelOrRating = <div className="ratingLabel">
                             <h2>Choose Between 1 - 5</h2>
-                            <p>with 1 being feeling the worst and 5 being feeling the best</p>
+                            <p>With 1 being feeling the worst and 5 being feeling the best</p>
                         </div>
         }
                 return( 

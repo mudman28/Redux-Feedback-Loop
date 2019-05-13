@@ -4,7 +4,8 @@ import {connect} from 'react-redux';
 
 class Support extends Component{
     state = {
-        support : ''
+        support : '',
+        currentPage : 3
 }
 
 handleRating = (event) => {
@@ -16,6 +17,7 @@ handleRating = (event) => {
 handleNext = event => {
     if(this.state.support > 0){
         this.props.dispatch({type : 'SET_SUPPORT', payload: this.state.support});
+        this.props.dispatch({type : 'SET_PAGE', payload: this.state.currentPage})
         this.props.history.push('/review');
     }
 }
@@ -28,7 +30,7 @@ handleNext = event => {
         } else {
         labelOrRating = <div className="ratingLabel">
                             <h2>Choose Between 1 - 5</h2>
-                            <p>with 1 being the least supportive and 5 being the most supportive</p>
+                            <p>With 1 being the least supportive and 5 being the most supportive</p>
                         </div>
         }
         return( 
